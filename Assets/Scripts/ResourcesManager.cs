@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ResourcesManager : MonoBehaviour {
 
@@ -7,6 +8,7 @@ public class ResourcesManager : MonoBehaviour {
     public int food, water, health;
     public int consume;
     public float timer;
+    public Text foodText, waterText, healthText;
 
 
 	// Use this for initialization
@@ -20,7 +22,10 @@ public class ResourcesManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        
+        foodText.text = food.ToString();
+        waterText.text = water.ToString();
+        healthText.text = health.ToString();
+
         if ((timer += Time.deltaTime) >= 1)
         {
             food -= consume;
@@ -44,5 +49,20 @@ public class ResourcesManager : MonoBehaviour {
     public void AddHealth()
     {
         health += 1;
+    }
+
+    public void RitualFood()
+    {
+        food += 20;
+    }
+
+    public void RitualWater()
+    {
+        water += 10;
+    }
+
+    public void RitualHealth()
+    {
+        health += 10;
     }
 }

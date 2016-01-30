@@ -10,7 +10,7 @@ public class ResourcesEvents : MonoBehaviour {
     public int[] currentDayEvent = new int[4];
     int currentDay, day = 1;
     public float dayTimer, dayMaxTimer;
-    private int penalitation;
+    private int penalitation = 9;
     public int basePenalty;
     public Text eventText;
     public string[] enventString = new string[4];
@@ -31,7 +31,7 @@ public class ResourcesEvents : MonoBehaviour {
             day++;
             if (currentDay >= currentDayEvent.Length) currentDay = 0;
             dayTimer = 0;
-            penalitation  += Mathf.FloorToInt(penalitation * 0.9f);
+            penalitation  *= 2;
             CheckCurrentDayEvent();
         }
 	}

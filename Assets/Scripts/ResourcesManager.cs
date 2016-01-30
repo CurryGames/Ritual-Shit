@@ -8,7 +8,7 @@ public class Resource
     public bool coolDown;
     public float initCoolDownTimer;
     public float coolDownTimer;
-    public int value;
+    public float value, modifier;
     public Text tex;
     public Slider coolDownBar;
 

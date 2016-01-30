@@ -45,7 +45,7 @@ public class ResourcesManager : MonoBehaviour {
     public float coolDownTimer;
     public float maxCoolUp;
     public float timer, tickTimer;
-    public Animator foodAnim, waterAnim, healthAnim, shamanAnimation;
+    public Animator foodAnim, waterAnim, healthAnim, shamanAnimation, ritualButtonAnimation;
     public Slider coolDownBar;
     VignetteAndChromaticAberration chromatic_Vignette;
     public AudioManager audio;
@@ -59,6 +59,7 @@ public class ResourcesManager : MonoBehaviour {
         chromatic_Vignette.enabled = false;
         timer = 0;
         consume = 3;
+        ritualButtonAnimation.Play("buttonRitualIddle");
 	}
 	
 	// Update is called once per frame
@@ -106,6 +107,7 @@ public class ResourcesManager : MonoBehaviour {
             {
                 coolDownTimer = initCoolDownTimer;
                 coolUp = false;
+                ritualButtonAnimation.Play("buttonRitualAnim");
                 /*food.resourceButton.enabled = false;
                 water.resourceButton.enabled = false;
                 health.resourceButton.enabled = false;*/
@@ -183,6 +185,7 @@ public class ResourcesManager : MonoBehaviour {
             chromatic_Vignette.enabled = true;
             audio.Play(audio.shaman, audio.sourceFX, 1);
             shamanAnimation.Play("ShamanDancing");
+            ritualButtonAnimation.Play("buttonRitualIddle");
         }
         
     }

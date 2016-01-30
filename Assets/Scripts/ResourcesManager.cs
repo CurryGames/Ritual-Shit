@@ -9,7 +9,7 @@ public class Resource
 {
     public float value, modifier, tick, particleCounter;
     public Text tex, tickText;
-    public Button resourceButton;
+    //public Button resourceButton;
     public ParticleSystem particles;
     public bool playingParticles;
 
@@ -49,7 +49,7 @@ public class ResourcesManager : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {
-        food.value = water.value = health.value = 100;
+        food.value = water.value = health.value = 20;
         food.tick = water.tick = health.tick = 1;
         chromatic_Vignette = Camera.main.GetComponent<VignetteAndChromaticAberration>();
         chromatic_Vignette.enabled = false;
@@ -63,7 +63,7 @@ public class ResourcesManager : MonoBehaviour {
         food.ResourceUpdate();
         water.ResourceUpdate();
         health.ResourceUpdate();
-
+/*
         if ((timer += Time.deltaTime) >= 5)
         {
             food.value -= consume * food.modifier;
@@ -72,6 +72,7 @@ public class ResourcesManager : MonoBehaviour {
 
             timer = 0;
         }
+        */
 
         if ((tickTimer += Time.deltaTime) >= 2)
         {
@@ -99,9 +100,9 @@ public class ResourcesManager : MonoBehaviour {
             {
                 coolDownTimer = initCoolDownTimer;
                 coolDown = false;
-                food.resourceButton.enabled = false;
+                /*food.resourceButton.enabled = false;
                 water.resourceButton.enabled = false;
-                health.resourceButton.enabled = false;
+                health.resourceButton.enabled = false;*/
                 chromatic_Vignette.enabled = false;
             }
 
@@ -144,9 +145,9 @@ public class ResourcesManager : MonoBehaviour {
         {
             food.value += 20;
             coolDown = true;
-            food.resourceButton.enabled = true;
+            /*food.resourceButton.enabled = true;
             water.resourceButton.enabled = true;
-            health.resourceButton.enabled = true;
+            health.resourceButton.enabled = true;*/
             chromatic_Vignette.enabled = true;
         }
         

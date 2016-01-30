@@ -5,28 +5,29 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Resource
 {
-    public bool coolDown;
-    public float initCoolDownTimer;
-    public float coolDownTimer;
-    public float value, modifier, tick;
+    public float value, modifier, tick, particleCounter;
     public Text tex, tickText;
-    public Slider coolDownBar;
+    public Button resourceButton;
+    public ParticleSystem particles;
+    public bool playingParticles;
 
     public void ResourceUpdate()
     {
-        if(coolDown)
+        if(playingParticles)
         {
-            coolDownTimer -= Time.deltaTime;
-            if(coolDownTimer <= 0)
+            particles.Emit(50);
+            particleCounter += Time.deltaTime;
+            if (particleCounter >= particles.duration)
             {
-                coolDownTimer = initCoolDownTimer;
-                coolDown = false;
+                particleCounter = 0;
+                //particles.Pause();
+                playingParticles = false;
+                
             }
-
         }
 
         tex.text = value.ToString();
-        coolDownBar.value = coolDownTimer / initCoolDownTimer;
+        
     }
 }
 
@@ -35,8 +36,12 @@ public class ResourcesManager : MonoBehaviour {
 
     public Resource food, water, health;
     public int consume;
+    public bool coolDown;
+    public float initCoolDownTimer;
+    public float coolDownTimer;
     public float timer, tickTimer;
     public Animator foodAnim, waterAnim, healthAnim;
+    public Slider coolDownBar;
 
     // Use this for initialization
     void Start () 
@@ -79,50 +84,62 @@ public class ResourcesManager : MonoBehaviour {
 
             tickTimer = 0;
         }
-	}
+
+        if (coolDown)
+        {
+            coolDownTimer -= Time.deltaTime;
+            if (coolDownTimer <= 0)
+            {
+                coolDownTimer = initCoolDownTimer;
+                coolDown = false;
+                food.resourceButton.enabled = false;
+                water.resourceButton.enabled = false;
+                health.resourceButton.enabled = false;
+            }
+
+        }
+
+        coolDownBar.value = coolDownTimer / initCoolDownTimer;
+    }
 
     public void AddFood()
     {
         food.value += 1;
+        if (!food.playingParticles)
+        {
+            food.playingParticles = true;
+        }
     }
 
     public void AddWater()
     {
         water.value += 1;
+        if(!water.playingParticles)
+        {
+            water.playingParticles = true;
+        }
     }
 
     public void AddHealth()
     {
         health.value += 1;
+        if (!health.playingParticles)
+        {
+            health.playingParticles = true;
+        }
     }
 
-    public void RitualFood()
+    public void Ritual()
     {
-        if(!food.coolDown)
+        if(!coolDown)
         {
             food.value += 20;
-            food.coolDown = true;
+            coolDown = true;
+            food.resourceButton.enabled = true;
+            water.resourceButton.enabled = true;
+            health.resourceButton.enabled = true;
         }
         
     }
 
-    public void RitualWater()
-    {
-        if(!water.coolDown)
-        {
-            water.value += 10;
-            water.coolDown = true;
-        }
-        
-    }
-
-    public void RitualHealth()
-    {
-        if(!health.coolDown)
-        {
-            health.value += 10;
-            health.coolDown = true;
-        }
-        
-    }
 }

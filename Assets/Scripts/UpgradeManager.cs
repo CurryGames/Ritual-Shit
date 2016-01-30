@@ -17,12 +17,13 @@ public class UpgradeManager : MonoBehaviour {
 	void Start () 
     {
         baseCost = cost;
+        resInfo.text = cost.ToString();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        resInfo.text = cost.ToString();
+       
 	}
 
     public void PurchaseUpgrade()
@@ -34,6 +35,7 @@ public class UpgradeManager : MonoBehaviour {
                 if (resources.health.value >= cost)
                 {
                     resources.health.value -= cost;
+                    resources.food.tick += 1;
                     count += 1;
                     cost = Mathf.Round(baseCost * Mathf.Pow(1.15f, (float)count));
                 }
@@ -43,6 +45,7 @@ public class UpgradeManager : MonoBehaviour {
                 if (resources.food.value >= cost)
                 {
                     resources.food.value -= cost;
+                    resources.water.tick += 1;
                     count += 1;
                     cost = Mathf.Round(baseCost * Mathf.Pow(1.15f, (float)count));
                 }
@@ -52,11 +55,13 @@ public class UpgradeManager : MonoBehaviour {
                 if (resources.water.value >= cost)
                 {
                     resources.water.value -= cost;
+                    resources.health.tick += 1;
                     count += 1;
                     cost = Mathf.Round(baseCost * Mathf.Pow(1.15f, (float)count));
                 }
                 break;
         }
-       
+
+        resInfo.text = cost.ToString();
     }
 }

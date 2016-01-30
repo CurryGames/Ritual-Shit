@@ -12,6 +12,7 @@ public class Resource
     //public Button resourceButton;
     public ParticleSystem particles;
     public bool playingParticles;
+    public int sume;
 
     public void ResourceUpdate()
     {
@@ -37,9 +38,9 @@ public class Resource
 public class ResourcesManager : MonoBehaviour {
 
     public Resource food, water, health;
-    public AudioManager audio;
     public int consume;
     public bool coolDown, coolUp;
+    private int ritualModifier;
     public float initCoolDownTimer;
     public float coolDownTimer;
     public float maxCoolUp;
@@ -78,13 +79,16 @@ public class ResourcesManager : MonoBehaviour {
 
         if ((tickTimer += Time.deltaTime) >= 2)
         {
-            food.value += food.tick;
-            water.value += water.tick;
-            health.value += health.tick;
+            food.value += food.tick * ritualModifier;
+            water.value += water.tick * ritualModifier;
+            health.value += health.tick * ritualModifier;
+            food.sume = (int)food.tick * ritualModifier;
+            water.sume = (int)water.tick * ritualModifier;
+            health.sume = (int)health.tick * ritualModifier;
 
-            food.tickText.text = "+ " + food.tick.ToString();
-            water.tickText.text = "+ " + water.tick.ToString();
-            health.tickText.text = "+ " + health.tick.ToString();
+            food.tickText.text = "+ " + food.sume.ToString();
+            water.tickText.text = "+ " + water.sume.ToString();
+            health.tickText.text = "+ " + health.sume.ToString();
 
             foodAnim.SetTrigger("show_tick");
             waterAnim.SetTrigger("show_tick");
@@ -123,7 +127,7 @@ public class ResourcesManager : MonoBehaviour {
                 water.resourceButton.enabled = false;
                 health.resourceButton.enabled = false;*/
                 chromatic_Vignette.enabled = false;
-                audio.ritualBGM.volume = 0;
+                ritualModifier = 1;
             }
             coolDownBar.value = coolDownTimer / initCoolDownTimer;
             chromatic_Vignette.chromaticAberration = Mathf.PingPong(Time.time*20, 200);
@@ -134,31 +138,28 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddFood()
     {
-        food.value += 1;
+        food.value += 1 * ritualModifier;
         if (!food.playingParticles)
         {
             food.playingParticles = true;
-            audio.Play(audio.chicken, audio.sourceFX, 1);
         }
     }
 
     public void AddWater()
     {
-        water.value += 1;
-        if(!water.playingParticles)
+        water.value += 1 * ritualModifier;
+        if (!water.playingParticles)
         {
-            water.playingParticles = true;    
-            audio.Play(audio.water, audio.sourceFX, 1);
+            water.playingParticles = true;
         }
     }
 
     public void AddHealth()
     {
-        health.value += 1;
+        health.value += 1 * ritualModifier;
         if (!health.playingParticles)
         {
             health.playingParticles = true;
-            audio.Play(audio.medicine, audio.sourceFX, 1);
         }
     }
 
@@ -166,14 +167,13 @@ public class ResourcesManager : MonoBehaviour {
     {
         if(!coolDown && !coolUp)
         {
-            audio.ritualBGM.volume = 1;
             food.value += 20;
             coolDown = true;
+            ritualModifier = 2;
             /*food.resourceButton.enabled = true;
             water.resourceButton.enabled = true;
             health.resourceButton.enabled = true;*/
             chromatic_Vignette.enabled = true;
-            audio.Play(audio.shaman, audio.sourceFX, 1);
         }
         
     }

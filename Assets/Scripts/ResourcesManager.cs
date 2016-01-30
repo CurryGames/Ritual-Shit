@@ -42,7 +42,7 @@ public class ResourcesManager : MonoBehaviour {
     {
         food.value = water.value = health.value = 100;
         timer = 0;
-        consume = 10;
+        consume = 3;
 	}
 	
 	// Update is called once per frame
@@ -54,9 +54,9 @@ public class ResourcesManager : MonoBehaviour {
 
         if ((timer += Time.deltaTime) >= 1)
         {
-            food.value -= consume;
-            water.value -= consume;
-            health.value -= consume;
+            food.value -= consume * food.modifier;
+            water.value -= consume * water.modifier;
+            health.value -= consume * health.modifier;
 
             timer = 0;
         }

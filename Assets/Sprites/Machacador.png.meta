@@ -1,9 +1,12 @@
 fileFormatVersion: 2
 guid: 47b3ccef481a06047a0b522330d5d85f
-timeCreated: 1454144742
+timeCreated: 1454148662
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Machacador_0
+    21300002: Machacador_1
+    21300004: Machacador_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,11 +29,11 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -2
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
-    aniso: -1
+    filterMode: 0
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -38,7 +41,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +52,64 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Machacador_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 2, y: 13}
+        - {x: -10, y: 6}
+        - {x: -10, y: -4}
+        - {x: -7, y: -7}
+        - {x: 4, y: -7}
+        - {x: 10, y: -5}
+        - {x: 10, y: 7}
+        - {x: 6, y: 13}
+    - name: Machacador_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -2, y: 13}
+        - {x: -10, y: 5}
+        - {x: -10, y: -4}
+        - {x: -5, y: -7}
+        - {x: 7, y: -7}
+        - {x: 11, y: -2}
+        - {x: 11, y: 12}
+        - {x: 9, y: 13}
+    - name: Machacador_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10, y: 10}
+        - {x: -10, y: -3}
+        - {x: -6, y: -7}
+        - {x: 5, y: -7}
+        - {x: 10, y: -6}
+        - {x: 10, y: 13}
+        - {x: 0, y: 13}
+        - {x: -9, y: 12}
     outline: []
   spritePackingTag: 
   userData: 

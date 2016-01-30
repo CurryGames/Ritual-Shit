@@ -8,11 +8,11 @@ public class GameManager : MonoBehaviour {
 
     public ResourcesManager resources;
 
-    public float timer, maxDayTime;
+    public float timer, maxDayTime, introTime;
 	// Use this for initialization
 	void Start ()
     {
-        resources = GetComponent<ResourcesManager>();
+        //resources = GetComponent<ResourcesManager>();
         timer = 0;
 	}
 	
@@ -22,16 +22,21 @@ public class GameManager : MonoBehaviour {
         switch(state)
         {
             case GameState.INTRO:
+                timer += Time.deltaTime;
+                if (timer >= introTime)
+                {
+                    state = GameState.GAMEPLAY;
+                    timer = 0;
+                }
                 break;
             case GameState.GAMEPLAY:
 
                 timer += Time.deltaTime;
 
-                if (timer >= maxDayTime)
-                {
-                    //TODO: Change day
 
-                    timer = 0;
+                if (resources.food.value == 0 || resources.water.value == 0 || resources.health.value == 0)
+                {
+                    GameOver();
                 }
 
                 break;
@@ -49,7 +54,7 @@ public class GameManager : MonoBehaviour {
 
     public void GameOver()
     {
-
+        state = GameState.END;
     }
 
 }

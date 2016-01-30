@@ -11,12 +11,13 @@ public class UpgradeManager : MonoBehaviour {
     public Text resInfo;
     public float cost;
     public float count = 0;
-    private float baseCost;
+    private float baseCost, baseValue;
 
 	// Use this for initialization
 	void Start () 
     {
         baseCost = cost;
+        baseValue = resources.food.tick;
         resInfo.text = cost.ToString();
 	}
 	
@@ -35,7 +36,7 @@ public class UpgradeManager : MonoBehaviour {
                 if (resources.health.value >= cost)
                 {
                     resources.health.value -= cost;
-                    resources.food.tick += 1;
+                    resources.food.tick += 1 + Mathf.Round(baseValue * Mathf.Pow(1.15f, (float)count));
                     count += 1;
                     cost = Mathf.Round(baseCost * Mathf.Pow(1.15f, (float)count));
                 }
@@ -45,7 +46,7 @@ public class UpgradeManager : MonoBehaviour {
                 if (resources.food.value >= cost)
                 {
                     resources.food.value -= cost;
-                    resources.water.tick += 1;
+                    resources.water.tick += 1 + Mathf.Round(baseValue * Mathf.Pow(1.1f, (float)count));
                     count += 1;
                     cost = Mathf.Round(baseCost * Mathf.Pow(1.15f, (float)count));
                 }
@@ -55,7 +56,7 @@ public class UpgradeManager : MonoBehaviour {
                 if (resources.water.value >= cost)
                 {
                     resources.water.value -= cost;
-                    resources.health.tick += 1;
+                    resources.health.tick += 1 + Mathf.Round(baseValue * Mathf.Pow(1.1f, (float)count));
                     count += 1;
                     cost = Mathf.Round(baseCost * Mathf.Pow(1.15f, (float)count));
                 }

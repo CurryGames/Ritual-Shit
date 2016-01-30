@@ -35,21 +35,26 @@ public class Resource
 public class ResourcesManager : MonoBehaviour {
 
     public Resource food, water, health;
-    public int consume;
+    public float consume;
     public bool coolDown;
     public float initCoolDownTimer;
     public float coolDownTimer;
     public float timer, tickTimer;
+    public Text foodConsume, waterConsume, healthConsume;
     public Animator foodAnim, waterAnim, healthAnim;
     public Slider coolDownBar;
 
     // Use this for initialization
     void Start () 
     {
-        food.value = water.value = health.value = 100;
+        //food.value = water.value = health.value = 100;
         food.tick = water.tick = health.tick = 1;
         timer = 0;
         consume = 3;
+
+        foodConsume.text = "-" + (consume * food.modifier).ToString();
+        waterConsume.text = "-" + (consume * water.modifier).ToString();
+        healthConsume.text = "-" + (consume * health.modifier).ToString();
 	}
 	
 	// Update is called once per frame
@@ -64,6 +69,10 @@ public class ResourcesManager : MonoBehaviour {
             food.value -= consume * food.modifier;
             water.value -= consume * water.modifier;
             health.value -= consume * health.modifier;
+
+            foodConsume.text = "-" + (consume * food.modifier).ToString();
+            waterConsume.text = "-" + (consume * water.modifier).ToString();
+            healthConsume.text = "-" + (consume * health.modifier).ToString();
 
             timer = 0;
         }

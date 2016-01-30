@@ -26,11 +26,11 @@ public class UpgradeManager : MonoBehaviour {
 
     public void PurchaseUpgrade()
     {
-        if (click.gold >= cost)
+        if (resources.food.value >= cost)
         {
-            click.gold -= cost;
+            resources.food.value -= cost;
             count += 1;
-            click.dmg += clickPower;
+            //click.dmg += clickPower;
             cost = Mathf.Round(baseCost * Mathf.Pow(1.15f, (float)count));
         }
     }

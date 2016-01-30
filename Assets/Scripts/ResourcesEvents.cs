@@ -14,6 +14,7 @@ public class ResourcesEvents : MonoBehaviour {
     public int basePenalty;
     public Text eventText;
     public string[] enventString = new string[4];
+    public Slider daySlider;
 
 	// Use this for initialization
 	void Start () {
@@ -23,13 +24,14 @@ public class ResourcesEvents : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         dayTimer += Time.deltaTime;
+        daySlider.value = dayTimer / dayMaxTimer;
         if(dayTimer >= dayMaxTimer)
         {
             currentDay++;
             day++;
             if (currentDay >= currentDayEvent.Length) currentDay = 0;
             dayTimer = 0;
-            penalitation  = basePenalty + Mathf.FloorToInt(Mathf.Pow(1.115f, (float)penalitation));
+            penalitation  += Mathf.FloorToInt(penalitation * 0.9f);
             CheckCurrentDayEvent();
         }
 	}

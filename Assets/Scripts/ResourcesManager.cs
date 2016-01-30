@@ -38,9 +38,10 @@ public class ResourcesManager : MonoBehaviour {
 
     public Resource food, water, health;
     public int consume;
-    public bool coolDown;
+    public bool coolDown, coolUp;
     public float initCoolDownTimer;
     public float coolDownTimer;
+    public float maxCoolUp;
     public float timer, tickTimer;
     public Animator foodAnim, waterAnim, healthAnim;
     public Slider coolDownBar;
@@ -91,6 +92,22 @@ public class ResourcesManager : MonoBehaviour {
             tickTimer = 0;
         }
 
+        if(coolUp)
+        {
+            coolDownTimer += Time.deltaTime;
+            coolDownBar.value = coolDownTimer / maxCoolUp;
+            if (coolDownTimer >= maxCoolUp)
+            {
+                coolDownTimer = initCoolDownTimer;
+                coolUp = false;
+                /*food.resourceButton.enabled = false;
+                water.resourceButton.enabled = false;
+                health.resourceButton.enabled = false;*/
+                //chromatic_Vignette.enabled = false;
+            }
+            
+        }
+
         //cuando esta en modo super ritual
         if (coolDown)
         {
@@ -98,18 +115,19 @@ public class ResourcesManager : MonoBehaviour {
             coolDownTimer -= Time.deltaTime;
             if (coolDownTimer <= 0)
             {
-                coolDownTimer = initCoolDownTimer;
+                coolDownTimer = 0;
                 coolDown = false;
+                coolUp = true;
                 /*food.resourceButton.enabled = false;
                 water.resourceButton.enabled = false;
                 health.resourceButton.enabled = false;*/
                 chromatic_Vignette.enabled = false;
             }
-
+            coolDownBar.value = coolDownTimer / initCoolDownTimer;
             chromatic_Vignette.chromaticAberration = Mathf.PingPong(Time.time*20, 200);
         }
 
-        coolDownBar.value = coolDownTimer / initCoolDownTimer;
+        
     }
 
     public void AddFood()
@@ -141,7 +159,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void Ritual()
     {
-        if(!coolDown)
+        if(!coolDown && !coolUp)
         {
             food.value += 20;
             coolDown = true;

@@ -37,6 +37,7 @@ public class Resource
 public class ResourcesManager : MonoBehaviour {
 
     public Resource food, water, health;
+    public AudioManager audio;
     public int consume;
     public bool coolDown, coolUp;
     public float initCoolDownTimer;
@@ -122,6 +123,7 @@ public class ResourcesManager : MonoBehaviour {
                 water.resourceButton.enabled = false;
                 health.resourceButton.enabled = false;*/
                 chromatic_Vignette.enabled = false;
+                audio.ritualBGM.volume = 0;
             }
             coolDownBar.value = coolDownTimer / initCoolDownTimer;
             chromatic_Vignette.chromaticAberration = Mathf.PingPong(Time.time*20, 200);
@@ -136,6 +138,7 @@ public class ResourcesManager : MonoBehaviour {
         if (!food.playingParticles)
         {
             food.playingParticles = true;
+            audio.Play(audio.chicken, audio.sourceFX, 1);
         }
     }
 
@@ -144,7 +147,8 @@ public class ResourcesManager : MonoBehaviour {
         water.value += 1;
         if(!water.playingParticles)
         {
-            water.playingParticles = true;
+            water.playingParticles = true;    
+            audio.Play(audio.water, audio.sourceFX, 1);
         }
     }
 
@@ -154,6 +158,7 @@ public class ResourcesManager : MonoBehaviour {
         if (!health.playingParticles)
         {
             health.playingParticles = true;
+            audio.Play(audio.medicine, audio.sourceFX, 1);
         }
     }
 
@@ -161,12 +166,14 @@ public class ResourcesManager : MonoBehaviour {
     {
         if(!coolDown && !coolUp)
         {
+            audio.ritualBGM.volume = 1;
             food.value += 20;
             coolDown = true;
             /*food.resourceButton.enabled = true;
             water.resourceButton.enabled = true;
             health.resourceButton.enabled = true;*/
             chromatic_Vignette.enabled = true;
+            audio.Play(audio.shaman, audio.sourceFX, 1);
         }
         
     }

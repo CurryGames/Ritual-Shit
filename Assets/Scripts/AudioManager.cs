@@ -4,8 +4,9 @@ using System.Collections;
 public class AudioManager : MonoBehaviour
 {
 
-    public AudioClip chicken, water, medicine;
+    public AudioClip chicken, water, medicine, shaman;
     public AudioClip ritual;
+    public AudioSource sourceFX, ritualBGM;
 
     // Use this for initialization
     void Start()
@@ -33,7 +34,7 @@ public class AudioManager : MonoBehaviour
         // REPRODUCIMOS EL SONIDO
         audioSource.Play();
         // DESTRUIMOS EL AUDIOSOURCE UNA VEZ ACABADO EL SONIDO
-        Destroy(audioSource, audio.length);
+        //  Destroy(audioSource, audio.length);
     }
 
     public void PlayLoop(AudioClip audio, AudioSource audioSource, float volum)

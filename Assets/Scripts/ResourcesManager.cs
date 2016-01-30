@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 using System.Collections;
 using UnityEngine.UI;
+
 
 [System.Serializable]
 public class Resource
@@ -42,12 +44,15 @@ public class ResourcesManager : MonoBehaviour {
     public float timer, tickTimer;
     public Animator foodAnim, waterAnim, healthAnim;
     public Slider coolDownBar;
+    VignetteAndChromaticAberration chromatic_Vignette;
 
     // Use this for initialization
     void Start () 
     {
         food.value = water.value = health.value = 100;
         food.tick = water.tick = health.tick = 1;
+        chromatic_Vignette = Camera.main.GetComponent<VignetteAndChromaticAberration>();
+        chromatic_Vignette.enabled = false;
         timer = 0;
         consume = 3;
 	}
@@ -85,8 +90,10 @@ public class ResourcesManager : MonoBehaviour {
             tickTimer = 0;
         }
 
+        //cuando esta en modo super ritual
         if (coolDown)
         {
+            
             coolDownTimer -= Time.deltaTime;
             if (coolDownTimer <= 0)
             {
@@ -95,8 +102,10 @@ public class ResourcesManager : MonoBehaviour {
                 food.resourceButton.enabled = false;
                 water.resourceButton.enabled = false;
                 health.resourceButton.enabled = false;
+                chromatic_Vignette.enabled = false;
             }
 
+            chromatic_Vignette.chromaticAberration = Mathf.PingPong(Time.time*20, 200);
         }
 
         coolDownBar.value = coolDownTimer / initCoolDownTimer;
@@ -138,6 +147,7 @@ public class ResourcesManager : MonoBehaviour {
             food.resourceButton.enabled = true;
             water.resourceButton.enabled = true;
             health.resourceButton.enabled = true;
+            chromatic_Vignette.enabled = true;
         }
         
     }

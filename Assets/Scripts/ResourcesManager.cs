@@ -76,8 +76,7 @@ public class ResourcesManager : MonoBehaviour {
             health.value -= consume * health.modifier;
 
             timer = 0;
-        }
-        */
+        }*/
 
         if ((tickTimer += Time.deltaTime) >= 2)
         {
@@ -143,7 +142,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddFood()
     {
-        food.value += 1 * ritualModifier;
+        food.value += Mathf.FloorToInt(1 + food.tick * 0.2f) * ritualModifier;
         if (!food.playingParticles)
         {
             food.playingParticles = true;
@@ -153,7 +152,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddWater()
     {
-        water.value += 1 * ritualModifier;
+        water.value += Mathf.FloorToInt(1 + water.tick *0.2f) * ritualModifier;
         if (!water.playingParticles)
         {
             water.playingParticles = true;
@@ -163,7 +162,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddHealth()
     {
-        health.value += 1 * ritualModifier;
+        health.value += Mathf.FloorToInt(1 + health.tick * 0.2f) * ritualModifier;
         if (!health.playingParticles)
         {
             health.playingParticles = true;

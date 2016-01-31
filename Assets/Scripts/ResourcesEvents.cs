@@ -80,7 +80,7 @@ public class ResourcesEvents : MonoBehaviour {
             eventText.text = "Dia " + day.ToString() + "\n" + enventString[3];
             pFoodText.text = "-" + penalitation.ToString();
             penalFood.animActive = true;
-            pHealthText.text = "-" + penalitation.ToString();
+            pWaterText.text = "-" + penalitation.ToString();
             penalWater.animActive = true;
             pHealthText.text = "-" + penalitation.ToString();
             penalHealth.animActive = true;

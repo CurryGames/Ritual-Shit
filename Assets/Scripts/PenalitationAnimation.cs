@@ -26,8 +26,8 @@ public class PenalitationAnimation : MonoBehaviour {
         colorImage = image.color;
         initAlpha = 0;
         finalValueAlpha = 1.0f;
-        timeDuration = 0.4f;
-        fadeOutDuration = 0.4f;
+        timeDuration = 1.5f;
+        fadeOutDuration = 1.5f;
         myTransfor = GetComponent<RectTransform>();
         startPostion = myTransfor.localPosition.y;
         position = myTransfor.localPosition;
@@ -44,10 +44,10 @@ public class PenalitationAnimation : MonoBehaviour {
         {
             if (fadeIn)
             {
-                if (timeCounter <= timeDuration)
+                if (timeCounter <= timeDuration/2)
                 {
                     timeCounter += Time.deltaTime;
-                    float currentAlpha = (float)Easing.CubicEaseIn(timeCounter, initAlpha, (finalValueAlpha - initAlpha), timeDuration);
+                    float currentAlpha = (float)Easing.CubicEaseIn(timeCounter, initAlpha, (finalValueAlpha - initAlpha), timeDuration/2);
 
                     colorImage.a = currentAlpha;
                     image.color = colorImage;

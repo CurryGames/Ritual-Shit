@@ -17,11 +17,11 @@ public class ResourcesEvents : MonoBehaviour {
     public Slider daySlider;
     public Text pFoodText, pWaterText, pHealthText;
     private PenalitationAnimation penalFood, penalWater, penalHealth;
-    public AudioManager audio;
+    public AudioManager _audioManager;
     public ShakeCamera shake;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         //CheckCurrentDayEvent();
         penalFood = pFoodText.gameObject.GetComponent<PenalitationAnimation>();
         penalWater = pWaterText.gameObject.GetComponent<PenalitationAnimation>();
@@ -49,7 +49,7 @@ public class ResourcesEvents : MonoBehaviour {
         resourcesManager.water.modifier = 1;
         resourcesManager.health.modifier = 1;*/
 
-        audio.Play(audio.curse, audio.eventos, 1);
+        _audioManager.Play(_audioManager.curse, _audioManager.eventos, 1);
         shake.startShake = true;
         shake.shakingForce = 0.5f;
         shake.shakeDecay = 0.02f;

@@ -58,7 +58,7 @@ public class ResourcesEvents : MonoBehaviour {
         {
             eventType = EventType.FOODEVENT;
             resourcesManager.food.value -= penalitation;
-            eventText.text = "Dia " + day.ToString() + "\n" + enventString[0];
+            eventText.text = "Day " + day.ToString() + "\n" + enventString[0];
             pFoodText.text = "-" + penalitation.ToString();
             penalFood.animActive = true;
         }
@@ -66,7 +66,7 @@ public class ResourcesEvents : MonoBehaviour {
         {
             eventType = EventType.WATEREVENT;
             resourcesManager.water.value -= penalitation;
-            eventText.text = "Dia " + day.ToString() + "\n" + enventString[1];
+            eventText.text = "Day " + day.ToString() + "\n" + enventString[1];
             pWaterText.text = "-" + penalitation.ToString();
             penalWater.animActive = true;
         }
@@ -74,7 +74,7 @@ public class ResourcesEvents : MonoBehaviour {
         {
             eventType = EventType.HEALTHEVENT;
             resourcesManager.health.value -= penalitation;
-            eventText.text = "Dia " + day.ToString() + "\n" + enventString[2];
+            eventText.text = "Day " + day.ToString() + "\n" + enventString[2];
             pHealthText.text = "-" + penalitation.ToString();
             penalHealth.animActive = true;
         }
@@ -84,7 +84,7 @@ public class ResourcesEvents : MonoBehaviour {
             resourcesManager.food.value -= penalitation;
             resourcesManager.water.value -= penalitation;
             resourcesManager.health.value -= penalitation;
-            eventText.text = "Dia " + day.ToString() + "\n" + enventString[3];
+            eventText.text = "Day " + day.ToString() + "\n" + enventString[3];
             pFoodText.text = "-" + penalitation.ToString();
             penalFood.animActive = true;
             pWaterText.text = "-" + penalitation.ToString();

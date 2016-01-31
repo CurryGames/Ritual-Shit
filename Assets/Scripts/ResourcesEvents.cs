@@ -18,6 +18,7 @@ public class ResourcesEvents : MonoBehaviour {
     public Text pFoodText, pWaterText, pHealthText;
     private PenalitationAnimation penalFood, penalWater, penalHealth;
     public AudioManager audio;
+    public ShakeCamera shake;
 
     // Use this for initialization
     void Start () {
@@ -49,6 +50,9 @@ public class ResourcesEvents : MonoBehaviour {
         resourcesManager.health.modifier = 1;*/
 
         audio.Play(audio.curse, audio.eventos, 1);
+        shake.startShake = true;
+        shake.shakingForce = 0.5f;
+        shake.shakeDecay = 0.02f;
 
         if (currentDayEvent[currentDay] == 0)
         {

@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour {
     public GameState state;
 
     public ResourcesManager resources;
-    public GameObject menuCanvas, playCanvas;
+    public GameObject menuCanvas, playCanvas, topPanel;
     public AudioManager _audio;
     public Animator shamanAnimator, fireAnimator, panelAnimator, gameOverTextAnimator;
     public AnimationClip shamanDie;
+    public AudioSource backgroundMusic;
     public bool playDead;
+    private int sreenShot;
 
     public float timer, maxDayTime, introTime;
 	// Use this for initialization
@@ -20,13 +22,21 @@ public class GameManager : MonoBehaviour {
         //resources = GetComponent<ResourcesManager>();
         state = GameState.MENU;
         playCanvas.SetActive(false);
+        topPanel.SetActive(false);
         timer = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-        switch(state)
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Application.CaptureScreenshot("ScreenShoot" + sreenShot.ToString("000") + ".png");
+            sreenShot++;
+        }
+
+        switch (state)
         {
             case GameState.INTRO:
                 /*timer += Time.deltaTime;
@@ -41,6 +51,7 @@ public class GameManager : MonoBehaviour {
                 {
                     menuCanvas.SetActive(false);
                     playCanvas.SetActive(true);
+                    topPanel.SetActive(true);
                     state = GameState.GAMEPLAY;
                 }
                     
@@ -88,6 +99,8 @@ public class GameManager : MonoBehaviour {
         panelAnimator.Play("gameOverBackground");
         gameOverTextAnimator.Play("gameOverText02");
         playDead = true;
+        resources.DesactivateRitual();
+        backgroundMusic.pitch = 0.5f;
         state = GameState.END;
     }
 
@@ -95,6 +108,7 @@ public class GameManager : MonoBehaviour {
     {
         menuCanvas.SetActive(false);
         playCanvas.SetActive(true);
+        topPanel.SetActive(true);
         _audio.Play(_audio.curse, _audio.eventos, 1);
         state = GameState.GAMEPLAY;
     }

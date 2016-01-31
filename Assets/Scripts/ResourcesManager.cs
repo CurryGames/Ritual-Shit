@@ -189,4 +189,11 @@ public class ResourcesManager : MonoBehaviour {
         
     }
 
+    public void DesactivateRitual()
+    {
+        chromatic_Vignette.enabled = false;
+        ritualModifier = 1;
+        audio.ritualBGM.volume = 0;
+    }
+
 }

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -7,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public GameState state;
 
     public ResourcesManager resources;
-    public GameObject menuCanvas, playCanvas, topPanel;
+    public GameObject menuCanvas, playCanvas, topPanel, finalText;
     public AudioManager _audio;
     public Animator shamanAnimator, fireAnimator, panelAnimator, gameOverTextAnimator;
     public AnimationClip shamanDie;
@@ -76,9 +78,15 @@ public class GameManager : MonoBehaviour {
                     {
                         shamanAnimator.Play("ShamanDead");
                         playDead = false;
+                        timer = 0;
                     }
                 }
-                if(Input.GetKeyDown(KeyCode.Return)) Application.LoadLevel(0);
+                if (!playDead) 
+                {
+                    timer += Time.deltaTime;
+                    if (timer >= 1 && (Input.anyKey)) Reload();
+                }
+               
                 
                     break;
         }
@@ -93,7 +101,9 @@ public class GameManager : MonoBehaviour {
 
     public void GameOver()
     {
+        finalText.SetActive(true);
         playCanvas.SetActive(false);
+        topPanel.SetActive(false);
         shamanAnimator.Play("ShamanDie");
         fireAnimator.Play("fireOffAnim");
         panelAnimator.Play("gameOverBackground");
@@ -112,5 +122,10 @@ public class GameManager : MonoBehaviour {
         _audio.Play(_audio.curse, _audio.eventos, 1);
         state = GameState.GAMEPLAY;
     }
+
+    public void Reload()
+    {
+        SceneManager.LoadScene(0);
+      }
 
 }

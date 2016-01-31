@@ -15,10 +15,15 @@ public class ResourcesEvents : MonoBehaviour {
     public Text eventText;
     public string[] enventString = new string[4];
     public Slider daySlider;
+    public Text pFoodText, pWaterText, pHealthText;
+    private PenalitationAnimation penalFood, penalWater, penalHealth;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         //CheckCurrentDayEvent();
+        penalFood = pFoodText.gameObject.GetComponent<PenalitationAnimation>();
+        penalWater = pWaterText.gameObject.GetComponent<PenalitationAnimation>();
+        penalHealth = pHealthText.gameObject.GetComponent<PenalitationAnimation>();
     }
 	
 	// Update is called once per frame
@@ -31,7 +36,7 @@ public class ResourcesEvents : MonoBehaviour {
             day++;
             if (currentDay >= currentDayEvent.Length) currentDay = 0;
             dayTimer = 0;
-            penalitation  *= 2;
+            penalitation  += penalitation/2;
             CheckCurrentDayEvent();
         }
 	}
@@ -47,18 +52,24 @@ public class ResourcesEvents : MonoBehaviour {
             eventType = EventType.FOODEVENT;
             resourcesManager.food.value -= penalitation;
             eventText.text = "Dia " + day.ToString() + "\n" + enventString[0];
+            pFoodText.text = "-" + penalitation.ToString();
+            penalFood.animActive = true;
         }
         else if (currentDayEvent[currentDay] == 1)
         {
             eventType = EventType.WATEREVENT;
             resourcesManager.water.value -= penalitation;
             eventText.text = "Dia " + day.ToString() + "\n" + enventString[1];
+            pWaterText.text = "-" + penalitation.ToString();
+            penalWater.animActive = true;
         }
         else if (currentDayEvent[currentDay] == 2)
         {
             eventType = EventType.HEALTHEVENT;
             resourcesManager.health.value -= penalitation;
             eventText.text = "Dia " + day.ToString() + "\n" + enventString[2];
+            pHealthText.text = "-" + penalitation.ToString();
+            penalHealth.animActive = true;
         }
         else if(currentDayEvent[currentDay] == 3)
         {
@@ -67,6 +78,13 @@ public class ResourcesEvents : MonoBehaviour {
             resourcesManager.water.value -= penalitation;
             resourcesManager.health.value -= penalitation;
             eventText.text = "Dia " + day.ToString() + "\n" + enventString[3];
+            pFoodText.text = "-" + penalitation.ToString();
+            penalFood.animActive = true;
+            pHealthText.text = "-" + penalitation.ToString();
+            penalWater.animActive = true;
+            pHealthText.text = "-" + penalitation.ToString();
+            penalHealth.animActive = true;
+
         }
     }
 }

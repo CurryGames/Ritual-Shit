@@ -17,6 +17,7 @@ public class ResourcesEvents : MonoBehaviour {
     public Slider daySlider;
     public Text pFoodText, pWaterText, pHealthText;
     private PenalitationAnimation penalFood, penalWater, penalHealth;
+    public AudioManager audio;
 
     // Use this for initialization
     void Start () {
@@ -46,6 +47,8 @@ public class ResourcesEvents : MonoBehaviour {
         /*resourcesManager.food.modifier = 1;
         resourcesManager.water.modifier = 1;
         resourcesManager.health.modifier = 1;*/
+
+        audio.Play(audio.curse, audio.eventos, 1);
 
         if (currentDayEvent[currentDay] == 0)
         {

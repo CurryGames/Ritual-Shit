@@ -4,9 +4,9 @@ using System.Collections;
 public class AudioManager : MonoBehaviour
 {
 
-    public AudioClip chicken, water, medicine, shaman;
+    public AudioClip chicken, water, medicine, shaman, curse;
     public AudioClip ritual;
-    public AudioSource sourceFX, ritualBGM;
+    public AudioSource sourceFX, ritualBGM, eventos;
 
     // Use this for initialization
     void Start()
